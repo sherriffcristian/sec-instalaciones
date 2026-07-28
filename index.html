@@ -88,6 +88,10 @@ a{color:inherit;text-decoration:none}
 .hero-stat:last-child::after{display:none}
 .hero-stat strong{display:block;font-family:var(--font-display);font-size:1.6rem;font-weight:700;color:var(--sage-light)}
 .hero-stat span{font-size:.8rem;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.05em}
+.scroll-cue{display:inline-flex;align-items:center;gap:8px;color:var(--sage-light);font-size:.85rem;font-weight:500;text-transform:uppercase;letter-spacing:.05em;margin-bottom:40px;transition:opacity .3s}
+.scroll-cue svg{width:18px;height:18px;animation:bounce 2s ease-in-out infinite}
+.scroll-cue:hover{opacity:.7}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
 
 /* CARDS - white on light bg */
 .card{background:var(--white);border:1px solid rgba(139,168,136,.1);border-radius:16px;transition:all .35s ease}
@@ -101,6 +105,13 @@ a{color:inherit;text-decoration:none}
 .svc-card:hover .svc-icon{background:rgba(139,168,136,.15)}
 .svc-card h3{font-size:1.25rem;font-weight:600;margin-bottom:12px}
 .svc-card p{color:var(--mid);font-size:.9rem;line-height:1.7}
+.problem-banner{margin-top:48px;background:var(--dark);border-radius:24px;padding:40px 48px;display:flex;align-items:center;gap:28px;flex-wrap:wrap}
+.problem-banner-icon{width:56px;height:56px;flex-shrink:0;background:rgba(139,168,136,.15);border-radius:16px;display:flex;align-items:center;justify-content:center}
+.problem-banner-icon svg{width:28px;height:28px;color:var(--sage-light)}
+.problem-banner-text{flex:1;min-width:240px}
+.problem-banner-text h3{color:#f0f4ee;font-size:1.3rem;font-weight:600;margin-bottom:8px}
+.problem-banner-text p{color:#b5c7b3;font-size:.9rem;line-height:1.6;margin:0}
+@media(max-width:768px){.problem-banner{padding:32px 24px;flex-direction:column;align-items:flex-start;text-align:left}.problem-banner .btn-primary{width:100%;justify-content:center}}
 
 /* PROJECTS */
 .projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
@@ -252,10 +263,9 @@ a{color:inherit;text-decoration:none}
 <span class="nav-brand"><span class="sec">SEC</span> <span class="inst">Instalaciones</span></span>
 </a>
 <div class="nav-links">
-<a href="#servicios">Servicios</a>
-<a href="#proyectos">Proyectos</a>
-<a href="#beneficios">Beneficios</a>
 <a href="#nosotros">Nosotros</a>
+<a href="#servicios">Soluciones</a>
+<a href="#electricistas">Electricistas</a>
 <a href="#contacto" class="nav-cta">Contactanos</a>
 </div>
 <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
@@ -266,12 +276,9 @@ a{color:inherit;text-decoration:none}
 
 <!-- MOBILE NAV -->
 <div class="mobile-nav" id="mobileNav" role="dialog" aria-label="Menú de navegación">
-<a href="#servicios" onclick="closeMobile()">Servicios</a>
-<a href="#proyectos" onclick="closeMobile()">Proyectos</a>
-<a href="#beneficios" onclick="closeMobile()">Beneficios</a>
-<a href="#proceso" onclick="closeMobile()">Cómo trabajamos</a>
 <a href="#nosotros" onclick="closeMobile()">Nosotros</a>
-<a href="#faq" onclick="closeMobile()">FAQ</a>
+<a href="#servicios" onclick="closeMobile()">Soluciones</a>
+<a href="#electricistas" onclick="closeMobile()">Electricistas</a>
 <a href="#contacto" onclick="closeMobile()" class="btn-primary" style="margin-top:16px">Contactanos</a>
 </div>
 
@@ -284,145 +291,27 @@ a{color:inherit;text-decoration:none}
 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
 General Pico, La Pampa
 </div>
-<h1 class="fade-up" style="transition-delay:.1s">Transformamos tu hogar en un espacio <span>inteligente</span></h1>
-<p class="hero-sub fade-up" style="transition-delay:.2s">Domótica, automatización y seguridad con Home Assistant. Controlá tu casa desde el celular, con la voz o de forma automática.</p>
+<h1 class="fade-up" style="transition-delay:.1s">Soluciones <span>inteligentes</span> para cada necesidad</h1>
+<p class="hero-sub fade-up" style="transition-delay:.2s">Domótica y automatización orientadas a resolver problemas concretos en hogares, locales y empresas: eficiencia energética, seguridad y confort en cada espacio.</p>
 <div class="hero-buttons fade-up" style="transition-delay:.3s">
-<a href="https://wa.me/542954594743?text=Hola%21%20Quiero%20consultar%20sobre%20dom%C3%B3tica%20para%20mi%20hogar" class="btn-primary" target="_blank" rel="noopener">
+<a href="https://wa.me/542954594743?text=Hola%21%20Tengo%20un%20problema%20que%20me%20gustar%C3%ADa%20resolver" class="btn-primary" target="_blank" rel="noopener">
 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 Consultá gratis
 </a>
 <a href="#servicios" class="btn-outline">
 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 16 16 12 12 8"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
-Ver servicios
+Ver soluciones
 </a>
 </div>
+<a href="#nosotros" class="scroll-cue fade-up" style="transition-delay:.35s">
+<span>Descubrí cómo</span>
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+</a>
 <div class="hero-stats fade-up" style="transition-delay:.4s">
 <div class="hero-stat"><strong>350+</strong><span>Dispositivos instalados</span></div>
 <div class="hero-stat"><strong>100%</strong><span>Soporte local</span></div>
 <div class="hero-stat"><strong>24/7</strong><span>Monitoreo remoto</span></div>
 </div>
-</div>
-</div>
-</section>
-
-<!-- SERVICIOS (light) -->
-<section class="section" id="servicios">
-<div class="container">
-<div class="section-header center fade-up">
-<div class="section-label" style="justify-content:center"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>Servicios</div>
-<h2 class="section-title">Soluciones inteligentes para cada necesidad</h2>
-<p class="section-desc">Ofrecemos un ecosistema completo de domótica y automatización.</p>
-</div>
-<div class="services-grid">
-<div class="card svc-card fade-up d1"><div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><h3>Automatización del Hogar</h3><p>Control de luces, climatización y dispositivos desde tu celular o con la voz. Todo tu hogar conectado en una sola app.</p></div>
-<div class="card svc-card fade-up d2"><div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3>Seguridad Inteligente</h3><p>Cámaras, sensores de puertas y alarmas con monitoreo remoto 24/7. Sabé qué pasa en tu casa desde cualquier lugar.</p></div>
-<div class="card svc-card fade-up d3"><div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg></div><h3>Control por Voz con Alexa</h3><p>Controlá todo tu hogar con comandos de voz simples. "Alexa, activá Buenos Días" y tu casa se configura sola.</p></div>
-<div class="card svc-card fade-up d1"><div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg></div><h3>Home Assistant</h3><p>Plataforma central de código abierto: potente, flexible y privada. Todo se integra en un solo lugar bajo tu control.</p></div>
-<div class="card svc-card fade-up d2"><div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><h3>Accesos y Portones</h3><p>Automatización de portones, persianas y accesos con control remoto. Abrí desde el celular o con un comando de voz.</p></div>
-<div class="card svc-card fade-up d3"><div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/><line x1="12" y1="2" x2="12" y2="4"/></svg></div><h3>Escenas Personalizadas</h3><p>"Buenos Días", "Me Voy", "Buenas Noches": un toque y todo se configura solo. Tu rutina, automatizada.</p></div>
-</div>
-</div>
-</section>
-
-<!-- PROYECTOS (alt bg) -->
-<section class="section section-alt" id="proyectos">
-<div class="container">
-<div class="section-header center fade-up">
-<div class="section-label" style="justify-content:center"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>Proyectos</div>
-<h2 class="section-title">Hogares que ya son inteligentes</h2>
-<p class="section-desc">Cada proyecto es único. Diseñamos soluciones a medida para cada familia y cada espacio.</p>
-</div>
-<div class="projects-grid">
-<div class="card proj-card fade-up d1"><div class="proj-header"><div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div><h3>Hogar Inteligente Completo</h3><span>Residencia familiar — General Pico</span></div></div><ul class="proj-features"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Home Assistant Green</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Control de iluminación por ambientes</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Sensores de temperatura y puertas</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Control de portón automático</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Escenas automatizadas</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Integración con Alexa y Spotify</li></ul></div>
-<div class="card proj-card fade-up d2"><div class="proj-header"><div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><h3>Seguridad y Monitoreo</h3><span>Casa con sistema integral — La Pampa</span></div></div><ul class="proj-features"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Cámaras Hik-Connect</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Sensores en accesos principales</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Alertas y monitoreo remoto</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Dashboard personalizado</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Soporte técnico continuo</li></ul></div>
-<div class="card proj-card fade-up d1"><div class="proj-header"><div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div><div><h3>Automatización Comercial</h3><span>Local comercial — General Pico</span></div></div><ul class="proj-features"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Control centralizado de iluminación</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Climatización inteligente</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Accesos automatizados</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Reportes de consumo</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Mantenimiento programado</li></ul></div>
-<div class="card proj-card fade-up d2"><div class="proj-header"><div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="12" y1="3" x2="12" y2="21"/></svg></div><div><h3>Edificio de 4 Pisos</h3><span>Edificio multifamiliar — General Pico</span></div></div><ul class="proj-features"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Automatización de equipos centrales</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Control de humo y monóxido</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Manejo de iluminación general</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Seguridad perimetral</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Monitoreo centralizado por pisos</li></ul></div>
-</div>
-</div>
-</section>
-
-<!-- TESTIMONIAL (light) -->
-<section class="section">
-<div class="container">
-<div class="testimonial-card fade-up">
-<p class="testimonial-quote">"Cada hogar que automatizamos es un cliente que nos recomienda"</p>
-<span class="testimonial-attr">— SEC Instalaciones, General Pico</span>
-</div>
-</div>
-</section>
-
-<!-- INTEGRACIONES (light) -->
-<section class="section section-alt" id="integraciones">
-<div class="container">
-<div class="section-header center fade-up">
-<div class="section-label" style="justify-content:center"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Integraciones</div>
-<h2 class="section-title">Compatibilidad total</h2>
-<p class="section-desc">Trabajamos con las mejores marcas y plataformas del mercado.</p>
-</div>
-<div class="logo-cloud fade-up">
-<div class="logo-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span>Domótica</span></div>
-<div class="logo-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg><span>Asistentes de Voz</span></div>
-<div class="logo-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg><span>Conectividad</span></div>
-<div class="logo-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg><span>Cámaras</span></div>
-<div class="logo-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span>Seguridad</span></div>
-<div class="logo-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15 1.65 1.65 0 0 0 3.17 14H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68 1.65 1.65 0 0 0 10 3.17V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg><span>Automatización</span></div>
-<div class="logo-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"/><polyline points="17 2 12 7 7 2"/></svg><span>Multimedia</span></div>
-<div class="logo-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg><span>Soporte Técnico</span></div>
-</div>
-</div>
-</section>
-
-<!-- BENEFICIOS (light) -->
-<section class="section" id="beneficios">
-<div class="container">
-<div class="section-header center fade-up">
-<div class="section-label" style="justify-content:center"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/></svg>Beneficios</div>
-<h2 class="section-title">¿Por qué elegir un hogar inteligente?</h2>
-<p class="section-desc">La domótica no es un lujo, es una mejora real en tu calidad de vida diaria.</p>
-</div>
-<div class="benefits-grid">
-<div class="card benefit-card fade-up d1"><div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></div><h3>Confort Total</h3><p>Controlá luces, clima y dispositivos desde donde estés.</p></div>
-<div class="card benefit-card fade-up d2"><div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><h3>Ahorro Energético</h3><p>Automatizaciones que reducen el consumo y optimizan recursos.</p></div>
-<div class="card benefit-card fade-up d3"><div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3>Seguridad 24/7</h3><p>Cámaras, sensores y alertas para proteger lo que más importa.</p></div>
-<div class="card benefit-card fade-up d1"><div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div><h3>Control Remoto</h3><p>Tu casa en la palma de tu mano, desde cualquier lugar.</p></div>
-<div class="card benefit-card fade-up d2"><div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="22" y1="12" x2="18" y2="12"/><line x1="6" y1="12" x2="2" y2="12"/><line x1="12" y1="6" x2="12" y2="2"/><line x1="12" y1="22" x2="12" y2="18"/></svg></div><h3>Personalización</h3><p>Adaptamos la tecnología a tu estilo de vida.</p></div>
-<div class="card benefit-card fade-up d3"><div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div><h3>Soporte Continuo</h3><p>Acompañamiento técnico permanente.</p></div>
-</div>
-</div>
-</section>
-
-<!-- PROCESO (alt) -->
-<section class="section section-alt" id="proceso">
-<div class="container">
-<div class="section-header center fade-up">
-<div class="section-label" style="justify-content:center"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Cómo trabajamos</div>
-<h2 class="section-title">Tu hogar inteligente en 4 pasos</h2>
-<p class="section-desc">Un proceso simple y sin complicaciones. Nosotros nos encargamos de todo.</p>
-</div>
-<div class="process-grid">
-<div class="process-step fade-up d1"><div class="process-num">1</div><h3>Consulta inicial</h3><p>Nos contactás por WhatsApp o formulario y nos contás qué necesitás para tu hogar.</p></div>
-<div class="process-step fade-up d2"><div class="process-num">2</div><h3>Relevamiento</h3><p>Visitamos tu hogar, evaluamos la infraestructura y diseñamos la solución ideal.</p></div>
-<div class="process-step fade-up d3"><div class="process-num">3</div><h3>Instalación</h3><p>Instalamos y configuramos todos los dispositivos y el sistema central Home Assistant.</p></div>
-<div class="process-step fade-up d4"><div class="process-num">4</div><h3>Soporte continuo</h3><p>Te capacitamos, entregamos manual de usuario y brindamos soporte técnico permanente.</p></div>
-</div>
-</div>
-</section>
-
-<!-- FAQ (light) -->
-<section class="section" id="faq">
-<div class="container">
-<div class="section-header center fade-up">
-<div class="section-label" style="justify-content:center"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Preguntas Frecuentes</div>
-<h2 class="section-title">Todo lo que necesitás saber</h2>
-</div>
-<div class="faq-list">
-<div class="faq-item fade-up"><button class="faq-q" aria-expanded="false">¿Qué es la domótica?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a"><p>La domótica es la automatización inteligente del hogar. Permite controlar luces, climatización, seguridad, accesos y más desde tu celular o con comandos de voz.</p></div></div>
-<div class="faq-item fade-up"><button class="faq-q" aria-expanded="false">¿Necesito hacer obras para instalar?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a"><p>En la mayoría de los casos, no. Trabajamos con dispositivos inalámbricos (WiFi y Zigbee) que se integran sin romper paredes.</p></div></div>
-<div class="faq-item fade-up"><button class="faq-q" aria-expanded="false">¿Qué es Home Assistant?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a"><p>Es una plataforma de código abierto que funciona como el cerebro de tu hogar inteligente. Integra todos tus dispositivos desde un solo lugar.</p></div></div>
-<div class="faq-item fade-up"><button class="faq-q" aria-expanded="false">¿Puedo controlar mi casa desde afuera?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a"><p>Sí. Con la app de Home Assistant podés supervisar y controlar todo desde cualquier lugar con internet.</p></div></div>
-<div class="faq-item fade-up"><button class="faq-q" aria-expanded="false">¿Qué pasa si se corta la luz o el internet?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a"><p>Los dispositivos vuelven a funcionar automáticamente cuando se restablece la energía y la conectividad.</p></div></div>
-<div class="faq-item fade-up"><button class="faq-q" aria-expanded="false">¿Ofrecen mantenimiento?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a"><p>Sí. Plan de seguimiento trimestral con actualizaciones, revisión de dispositivos y consultas personalizadas.</p></div></div>
-<div class="faq-item fade-up"><button class="faq-q" aria-expanded="false">¿Puedo empezar con pocos dispositivos?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a"><p>¡Por supuesto! Podés comenzar con lo esencial e ir sumando a medida que lo necesites.</p></div></div>
 </div>
 </div>
 </section>
@@ -448,7 +337,7 @@ Ver servicios
 </div>
 <div class="about-text">
 <h3>Tecnología con trato humano</h3>
-<p>Somos una empresa de General Pico, La Pampa, especializada en domótica y automatización del hogar con Home Assistant. Nuestro objetivo es que la tecnología sea accesible, simple y útil para toda la familia.</p>
+<p>Somos una empresa de General Pico, La Pampa, especializada en domótica y automatización con Home Assistant. Nuestro objetivo es que la tecnología sea accesible, simple y útil.</p>
 <p>Cada proyecto lo encaramos de forma personalizada: escuchamos tus necesidades, diseñamos la solución y te acompañamos desde el primer día con soporte técnico continuo.</p>
 <div class="about-values">
 <div class="about-value"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><div><h4>Soporte local y cercano</h4><p>Estamos en General Pico. Ante cualquier consulta, estamos cerca.</p></div></div>
@@ -460,13 +349,77 @@ Ver servicios
 </div>
 </section>
 
+<!-- SERVICIOS (light) -->
+<section class="section" id="servicios">
+<div class="container">
+<div class="section-header center fade-up">
+<div class="section-label" style="justify-content:center"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>Soluciones</div>
+<h2 class="section-title">Existe una solución <span style="color:var(--sage-dark);font-style:italic">inteligente</span> para cada problema</h2>
+<p class="section-desc">Diseñamos cada solución a partir de una necesidad concreta, integrando tecnología simple y funcional para tu hogar, local o empresa.</p>
+</div>
+<div class="services-grid">
+<div class="card svc-card fade-up d1"><div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><h3>Automatización del Hogar</h3><p>Integramos el control de luces, climatización, riego, cámaras y accesos en un solo sistema, para que tu hogar funcione de forma automática y eficiente.</p></div>
+<div class="card svc-card fade-up d2"><div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3>Seguridad Inteligente</h3><p>Saber qué pasa en tu casa o local aunque no estés, con la posibilidad de simular presencia para disuadir intrusos. Conocé nuestro Modo Vacaciones.</p></div>
+<div class="card svc-card fade-up d3"><div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg></div><h3>Control por Voz con Alexa</h3><p>La tranquilidad de saber que Alexa está lista para ayudarte en tu día a día y en el manejo de tu casa, con solo un comando de voz.</p></div>
+<div class="card svc-card fade-up d1"><div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg></div><h3>Home Assistant</h3><p>Un solo lugar para controlar todo, sin depender de una marca ni de la nube de nadie. La decisión sobre cómo funciona tu casa es tuya.</p></div>
+<div class="card svc-card fade-up d2"><div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><h3>Accesos y Portones</h3><p>Imaginate salir sin pensar dónde están las llaves: todo manejado desde tu celular o con tus datos biométricos.</p></div>
+<div class="card svc-card fade-up d3"><div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/><line x1="12" y1="2" x2="12" y2="4"/></svg></div><h3>Escenas Personalizadas</h3><p>Cada escena es personalizada y diseñada según tus necesidades.</p></div>
+<div class="card svc-card fade-up d1"><div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z"/></svg></div><h3>Climatización e Iluminación Comercial</h3><p>Zonificá luces y climatización según horarios de atención y uso real de cada ambiente, para que tu local o empresa no gaste de más fuera de horario.</p></div>
+<div class="card svc-card fade-up d2"><div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></div><h3>Seguridad y Detección para Negocios</h3><p>Sensores de humo y gas, cámaras y alarmas con monitoreo remoto, pensados para locales, depósitos y oficinas.</p></div>
+<div class="card svc-card fade-up d3"><div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="12" x2="22" y2="12"/><line x1="12" y1="2" x2="12" y2="22"/><path d="m20 16-4-4 4-4"/><path d="m4 8 4 4-4 4"/><path d="m16 4-4 4-4-4"/><path d="m8 20 4-4 4 4"/></svg></div><h3>Monitoreo de Cámaras Frigoríficas</h3><p>Monitoreo remoto de temperatura las 24 horas, con alertas inmediatas ante cualquier falla para proteger tus productos.</p></div>
+<div class="problem-banner fade-up">
+<div class="problem-banner-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+<div class="problem-banner-text">
+<h3>Contanos qué te gustaría automatizar, o qué solución necesitarías</h3>
+<p>Cada hogar, local o empresa tiene un problema distinto. Contanos el tuyo y te mostramos, en simple, cómo la tecnología puede resolverlo — una solución inteligente para cada necesidad.</p>
+</div>
+<a href="#contacto" class="btn-primary">Contame tu situación</a>
+</div>
+</div>
+</div>
+</section>
+
+<!-- TESTIMONIAL (light) -->
+<section class="section">
+<div class="container">
+<div class="testimonial-card fade-up">
+<p class="testimonial-quote">"Cada hogar que automatizamos es un cliente que nos recomienda"</p>
+<span class="testimonial-attr">— SEC Instalaciones, General Pico</span>
+</div>
+</div>
+</section>
+
+<!-- ELECTRICISTAS (alt bg) -->
+<section class="section section-alt" id="electricistas">
+<div class="container">
+<div class="section-header center fade-up">
+<div class="section-label" style="justify-content:center"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>Para Electricistas</div>
+<h2 class="section-title">¿Sos <span style="color:var(--sage-dark);font-style:italic">electricista</span>?</h2>
+<p class="section-desc">¡Tenemos una propuesta para vos! Te acompañamos para que puedas llevarles soluciones a tus clientes, estés donde estés.</p>
+</div>
+<div class="benefits-grid">
+<div class="card benefit-card fade-up d1"><div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4"/><path d="M4 6v12c0 1.1.9 2 2 2h14v-4"/><path d="M18 12a2 2 0 0 0-2 2c0 1.1.9 2 2 2h4v-4h-4z"/></svg></div><h3>Kits listos para instalar</h3><p>Vas con todo armado: dispositivos, guía de instalación y soporte para trabajar en la obra sin vueltas.</p></div>
+<div class="card benefit-card fade-up d2"><div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg></div><h3>Te acompañamos en la instalación</h3><p>Soporte técnico remoto mientras trabajás, para resolver dudas en el momento sin frenar la obra.</p></div>
+<div class="card benefit-card fade-up d3"><div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><h3>Sumás un servicio más</h3><p>Ofrecele domótica a tus clientes sin dejar de ser vos quien hace el trabajo y se queda con la relación.</p></div>
+</div>
+<div class="problem-banner fade-up">
+<div class="problem-banner-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
+<div class="problem-banner-text">
+<h3>Contános cómo podríamos ayudarte</h3>
+<p>Decinos en qué trabajás y qué necesitás. Armamos juntos la mejor forma de sumar domótica a tus proyectos, con los kits y el soporte que hagan falta.</p>
+</div>
+<a href="https://wa.me/542954594743?text=Hola%21%20Soy%20electricista%20y%20quiero%20saber%20c%C3%B3mo%20puedo%20ofrecer%20dom%C3%B3tica%20a%20mis%20clientes" class="btn-primary" target="_blank" rel="noopener">Quiero sumarme</a>
+</div>
+</div>
+</section>
+
 <!-- CONTACTO (dark) -->
 <section class="section section-dark" id="contacto">
 <div class="container">
 <div class="section-header center fade-up">
 <div class="section-label" style="justify-content:center"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Contacto</div>
-<h2 class="section-title">¿Listo para automatizar tu hogar?</h2>
-<p class="section-desc">Escribinos y te asesoramos sin compromiso. Tu hogar inteligente está a un mensaje de distancia.</p>
+<h2 class="section-title">Cada solución empieza con una conversación</h2>
+<p class="section-desc">¿Querés saber cómo podemos ayudarte? Escribinos y coordinamos una reunión presencial para contarte, en detalle, todas las soluciones que tenemos para vos.</p>
 </div>
 <div class="contact-grid fade-up">
 <div class="contact-info">
@@ -478,8 +431,8 @@ Ver servicios
 <form class="contact-form" id="contactForm" onsubmit="handleSubmit(event)">
 <div class="form-group"><input type="text" name="nombre" placeholder="Tu nombre *" required aria-label="Tu nombre"></div>
 <div class="form-group"><input type="tel" name="telefono" placeholder="Tu teléfono / WhatsApp *" required aria-label="Tu teléfono"></div>
-<div class="form-group"><select name="servicio" aria-label="Servicio de interés"><option value="">¿Qué servicio te interesa?</option><option value="automatizacion">Automatización del hogar</option><option value="seguridad">Seguridad inteligente</option><option value="alexa">Control por voz con Alexa</option><option value="home-assistant">Home Assistant</option><option value="accesos">Accesos y portones</option><option value="escenas">Escenas personalizadas</option><option value="edificio">Edificios y comercial</option><option value="otro">Otro</option></select></div>
-<div class="form-group"><textarea name="mensaje" rows="4" placeholder="Ej: Quiero automatizar las luces y la seguridad de mi casa" aria-label="Tu mensaje"></textarea></div>
+<div class="form-group"><select name="servicio" aria-label="Servicio de interés"><option value="">¿Qué problema querés resolver?</option><option value="automatizacion">Automatización del hogar</option><option value="seguridad">Seguridad inteligente</option><option value="alexa">Control por voz con Alexa</option><option value="home-assistant">Home Assistant</option><option value="accesos">Accesos y portones</option><option value="escenas">Escenas personalizadas</option><option value="edificio">Edificios y comercial</option><option value="electricista">Soy electricista, quiero sumarme</option><option value="otro">Otro</option></select></div>
+<div class="form-group"><textarea name="mensaje" rows="4" placeholder="Ej: La calefacción queda prendida cuando no hay nadie y el gasto es alto" aria-label="Tu mensaje"></textarea></div>
 <button type="submit" class="form-submit" id="formSubmit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Enviar consulta</button>
 </form>
 </div>
@@ -503,7 +456,7 @@ Ver servicios
 </footer>
 
 <!-- WHATSAPP FLOAT -->
-<a href="https://wa.me/542954594743?text=Hola%21%20Quiero%20consultar%20sobre%20dom%C3%B3tica" class="wa-float" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
+<a href="https://wa.me/542954594743?text=Hola%21%20Tengo%20un%20problema%20que%20me%20gustar%C3%ADa%20resolver" class="wa-float" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
